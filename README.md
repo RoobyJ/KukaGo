@@ -1,9 +1,9 @@
 # KukaGo
-KukaGo is a tool for kuka robot programmers to help them in boring tasks. For now it just get data from $config.dat to excel, there is to a version in python written works same as this but when comparing both working time program written in GoLang works about 5 times faster ( I checked it on 32 kuka robot backups, python procced in ~2.9s GoLang needed ~0.4s ) so i decided to continue this project in GoLang
+KukaGo is a tool for kuka robot programmers to help them in boring tasks. For now it just get data from $config.dat to excel, there is to a version in python written works same as this but when comparing both working time program written in Golang works about 5 times faster ( I checked it on 32 kuka robot backups, python procced in ~2.9s Golang needed ~0.4s ) so i decided to continue this project in Golang
 
 ## Instalation 
 
-download just all files ( needed GoLang 1.19 )
+download just all files ( needed Golang 1.19 )
 
 ## Usage
 KukaGo-Excel
