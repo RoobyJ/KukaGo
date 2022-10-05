@@ -18,7 +18,7 @@ func (data *dataTree) createExcel(path string, fileName string) {
 
 		wb = data.configureSheet(dataType, wb)
 		//// Set value of a cell.
-		wb = data.passData(dataType, wb)
+		wb = data.passConfigData(dataType, wb)
 		//checkError(wb.SetCellValue(dataType.name, "B2", 100))
 		// Set active sheet of the workbook.
 
@@ -33,7 +33,7 @@ func (data *dataTree) createExcel(path string, fileName string) {
 
 }
 
-func (data *dataTree) passData(dataType datatype, wb *excelize.File) *excelize.File {
+func (data *dataTree) passConfigData(dataType datatype, wb *excelize.File) *excelize.File {
 	for _, typ := range data.types {
 		if dataType.name == typ.name {
 			for i := 0; i <= 127; i++ { // 127 because each data type has 128 rows and the for loop starts from 0

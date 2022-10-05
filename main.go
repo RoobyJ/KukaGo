@@ -4,17 +4,23 @@ import (
 	"flag"
 	"log"
 	"os"
+	"strings"
 	"sync"
 )
 
+// TODO: read form .dat files nad check tools and bases
+//
 // Variables used for command line parameters
 var (
-	path string
+	path   string
+	action string
 )
 
 // parsing input into var path
 func init() {
 	flag.StringVar(&path, "p", "", "backups path")
+	flag.StringVar(&action, "a", "", "configToExcel")
+
 	flag.Parse()
 }
 
@@ -24,6 +30,11 @@ func configToExcel(wg *sync.WaitGroup, f os.DirEntry) {
 	obj := *newDataTree()
 	obj.getConfigData(path, f)
 
+}
+
+// In build
+func colliCheck(wg *sync.WaitGroup) {
+	defer wg.Done()
 }
 
 // counting all folders in path
@@ -46,14 +57,19 @@ func checkError(err error) {
 
 func main() {
 	wg := sync.WaitGroup{}
-	files, err := os.ReadDir(path) // all folders in entered dir
-	checkError(err)
-	count := countDirs(files) // amount of folders in input dir
-	wg.Add(count)
-	for _, f := range files {
-		if f.IsDir() {
-			go configToExcel(&wg, f)
+	switch strings.ToLower(action) {
+	case "excel":
+		files, err := os.ReadDir(path) // all folders in entered dir
+		checkError(err)
+		count := countDirs(files) // amount of folders in input dir
+		wg.Add(count)
+		for _, f := range files {
+			if f.IsDir() {
+				go configToExcel(&wg, f)
+			}
 		}
+		wg.Wait()
+	case "colli": // In build
+		colliCheck(&wg)
 	}
-	wg.Wait()
 }
